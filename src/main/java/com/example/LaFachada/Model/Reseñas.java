@@ -1,11 +1,16 @@
 package com.example.LaFachada.Model;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 
 import java.time.LocalDate;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 public class Reseñas {
@@ -14,21 +19,29 @@ public class Reseñas {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long idreseñas;
 
     private String comentario;
-    private int calificacion; // "1-5"
+    private Integer calificacion; // "1-5"
     private LocalDate fecha;
 
     private Long usuarioId;
     private Long propiedadId;
 
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "publicacion_id", nullable = false)
+    @JsonBackReference
+    private Publicacion publicacion;
+
+    
+
     public Long getId() {
-        return id;
+        return idreseñas;
     }
 
     public void setId(Long id) {
-        this.id = id;
+        this.idreseñas = id;
     }
 
     public String getComentario() {
@@ -39,11 +52,11 @@ public class Reseñas {
         this.comentario = comentario;
     }
 
-    public int getCalificacion() {
+    public Integer getCalificacion() {
         return calificacion;
     }
 
-    public void setCalificacion(int calificacion) {
+    public void setCalificacion(Integer calificacion) {
         this.calificacion = calificacion;
     }
 
@@ -69,5 +82,13 @@ public class Reseñas {
 
     public void setPropiedadId(Long propiedadId) {
         this.propiedadId = propiedadId;
+    }
+
+    public Publicacion getPublicacion() {
+        return publicacion;
+    }
+
+    public void setPublicacion(Publicacion publicacion) {
+        this.publicacion = publicacion;
     }
 }
