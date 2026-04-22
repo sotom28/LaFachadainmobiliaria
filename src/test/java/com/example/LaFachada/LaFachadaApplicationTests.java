@@ -1,10 +1,6 @@
 package com.example.LaFachada;
 
 import com.example.LaFachada.Controller.PublicacionController;
-import com.example.LaFachada.Model.Publicacion;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
