@@ -12,7 +12,10 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import lombok.Data;
 
+
+@Data	
 @Entity
 public class Publicacion {
 
@@ -28,6 +31,28 @@ private String descripcion;
 private String precio;
 
 private String ubicacion;
+
+private String Region;
+
+private String Comuna;
+
+private String contacto;
+
+private String estado;
+
+private String fechaPublicacion;
+
+private String tipoventas; 
+
+private String fotosUrl;
+
+private String tipoPropiedad;
+
+private int cantidadhabitaciones;
+
+private int cantidadbaños;
+
+
 
 
 @OneToMany(mappedBy = "publicacion", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -95,5 +120,85 @@ public void setUbicacion(String ubicacion) {
 
 
 }
+public String getRegion() {
+	return Region;
+}
 
+public void setRegion(String region) {
+	Region = region;
+}
+
+public String getComuna() {
+	return Comuna;
+}
+
+public void setComuna(String comuna) {
+	Comuna = comuna;
+}
+
+public String getContacto() {
+	return contacto;
+}
+
+public void setContacto(String contacto) {
+	this.contacto = contacto;
+}
+
+public String getEstado() {
+	return estado;
+}
+
+public void setEstado(String estado) {
+	this.estado = estado;
+}
+
+public String getFechaPublicacion() {
+	return fechaPublicacion;
+}
+
+public void setFechaPublicacion(String fechaPublicacion) {
+	this.fechaPublicacion = fechaPublicacion;
+}
+
+public String getTipoventas() {
+	return tipoventas;
+}
+
+public void setTipoventas(String tipoventas) {
+	this.tipoventas = tipoventas;
+}
+
+public String getFotosUrl() {
+	return fotosUrl;
+}
+
+public String getTipoPropiedad() {
+	return tipoPropiedad;
+}
+
+public void setTipoPropiedad(String tipoPropiedad) {
+	this.tipoPropiedad = tipoPropiedad;
+}
+
+public void setFotosUrl(String fotosUrl) {
+	this.fotosUrl = fotosUrl;
+
+	
+	}
+
+public int getCantidadhabitaciones() {
+	return cantidadhabitaciones;
+
+}
+public int getCantidadbaños() {
+		return cantidadbaños;
+	}
+public void setCantidadbaños(int cantidadbaños) {
+	this.cantidadbaños = cantidadbaños;
+
+}
+public void setCantidadhabitaciones(int cantidadhabitaciones) {
+	this.cantidadhabitaciones = cantidadhabitaciones;
+
+}
 }

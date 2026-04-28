@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,13 +18,13 @@ import com.example.LaFachada.Model.Publicacion;
 import com.example.LaFachada.Service.PublicacionService;
 
 
-
+@Controller
 @RequestMapping("/api/publicacion")
 @RestController
 public class PublicacionController {
 
   
-    private PublicacionService publicacionService;
+    private final PublicacionService publicacionService;
 
     public PublicacionController(PublicacionService publicacionService) {
         this.publicacionService = publicacionService;
