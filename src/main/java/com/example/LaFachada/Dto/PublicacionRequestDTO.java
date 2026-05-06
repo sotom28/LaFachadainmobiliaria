@@ -20,5 +20,6 @@ public class PublicacionRequestDTO {
     private String tipoPropiedad;
     private Integer cantidadhabitaciones;
     private Integer cantidadbaños;
+    
 }
 
