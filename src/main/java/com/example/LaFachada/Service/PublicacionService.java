@@ -1,18 +1,19 @@
 package com.example.LaFachada.Service;
 
 
-import com.example.LaFachada.Model.Publicacion;
-import com.example.LaFachada.Respository.PublicacionRepository;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.example.LaFachada.Model.Publicacion;
+import com.example.LaFachada.Respository.PublicacionRepository;
+
 @Service
 public class PublicacionService {
 
-
+    // Inyección de dependencia del repositorio
     private final PublicacionRepository publicacionRepository;
-
+    //
     public PublicacionService(PublicacionRepository publicacionRepository) {
         this.publicacionRepository = publicacionRepository;
 

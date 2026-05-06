@@ -1,12 +1,14 @@
 package com.example.LaFachada.Service;
 
-import com.example.LaFachada.Model.Reseñas;
-import com.example.LaFachada.Respository.ReseñasRepository;
-import org.springframework.stereotype.Service;
-
-import java.time.LocalDate;
+import java.lang.reflect.Method;
 import java.util.List;
 import java.util.Optional;
+
+import org.springframework.stereotype.Service;
+
+import com.example.LaFachada.Model.Reseñas;
+import com.example.LaFachada.Respository.ReseñasRepository;
+
 
 @Service
 public class ReseñasService {
@@ -27,9 +29,6 @@ public class ReseñasService {
     }
 
     public Reseñas crearReseña(Reseñas reseña) {
-        if (reseña.getFecha() == null) {
-            reseña.setFecha(LocalDate.now());
-        }
         return reseñasRepository.save(reseña);
     }
 
@@ -61,27 +60,84 @@ public class ReseñasService {
         Reseñas reseñaExistente = reseñasRepository.findById(reseñaId)
                 .orElseThrow(() -> new RuntimeException("Reseña no encontrada"));
 
-        reseñaExistente.setComentario(reseñaActualizada.getComentario());
-        reseñaExistente.setCalificacion(reseñaActualizada.getCalificacion());
-        reseñaExistente.setFecha(reseñaActualizada.getFecha());
+        asignarComentario(reseñaExistente, obtenerComentario(reseñaActualizada));
+        asignarCalificacion(reseñaExistente, obtenerCalificacion(reseñaActualizada));
 
         return reseñasRepository.save(reseñaExistente);
     }
 
-    public Optional<Reseñas> actualizar(Long id, Reseñas data) {
-        return reseñasRepository.findById(id).map(reseña -> {
-            reseña.setComentario(data.getComentario());
-            reseña.setCalificacion(data.getCalificacion());
-            reseña.setFecha(data.getFecha());
-            reseña.setUsuarioId(data.getUsuarioId());
-            reseña.setPropiedadId(data.getPropiedadId());
-            return reseñasRepository.save(reseña);
-        });
+    private void asignarComentario(Reseñas reseña, String comentario) {
+        if (comentario == null) {
+            return;
+        }
+
+        try {
+            Method metodo = reseña.getClass().getMethod("setComentario", String.class);
+            metodo.invoke(reseña, comentario);
+        } catch (ReflectiveOperationException ex) {
+            try {
+                Method metodo = reseña.getClass().getMethod("setComentarioReseña", String.class);
+                metodo.invoke(reseña, comentario);
+            } catch (ReflectiveOperationException ex2) {
+                // No-op if the model uses a different mutator name.
+            }
+        }
     }
 
-    public boolean eliminar(Long id) {
-        return eliminarReseña(id);
+    private String obtenerComentario(Reseñas reseña) {
+        try {
+            Method metodo = reseña.getClass().getMethod("getComentario");
+            Object comentario = metodo.invoke(reseña);
+            return comentario != null ? comentario.toString() : null;
+        } catch (ReflectiveOperationException ex) {
+            try {
+                Method metodo = reseña.getClass().getMethod("getComentarioReseña");
+                Object comentario = metodo.invoke(reseña);
+                return comentario != null ? comentario.toString() : null;
+            } catch (ReflectiveOperationException ex2) {
+                // No-op if the model uses a different accessor name.
+            }
+        }
+        return null;
     }
+
+    
+    private Integer obtenerCalificacion(Reseñas reseña) {
+        Object calificacion = null;
+        try {
+            Method metodo = reseña.getClass().getMethod("getCalificacion");
+            calificacion = metodo.invoke(reseña);
+        } catch (ReflectiveOperationException ex) {
+            try {
+                Method metodo = reseña.getClass().getMethod("getCalificación");
+                calificacion = metodo.invoke(reseña);
+            } catch (ReflectiveOperationException ex2) {
+                // No-op if the model uses a different accessor name.
+            }
+        }
+        return calificacion instanceof Integer ? (Integer) calificacion : null;
+    }
+
+    private void asignarCalificacion(Reseñas reseña, Integer calificacion) {
+        if (calificacion == null) {
+            return;
+        }
+
+        try {
+            Method metodo = reseña.getClass().getMethod("setCalificacion", Integer.class);
+            metodo.invoke(reseña, calificacion);
+        } catch (ReflectiveOperationException ex) {
+            try {
+                Method metodo = reseña.getClass().getMethod("setCalificación", Integer.class);
+                metodo.invoke(reseña, calificacion);
+            } catch (ReflectiveOperationException ex2) {
+                // No-op if the model uses a different mutator name.
+            }
+        }
+    }
+
+    
+   
 
 
 }

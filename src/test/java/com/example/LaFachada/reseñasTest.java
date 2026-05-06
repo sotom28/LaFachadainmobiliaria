@@ -1,13 +1,13 @@
 package com.example.LaFachada;
 
-import com.example.LaFachada.Model.Publicacion;
-import com.example.LaFachada.Model.Reseñas;
-import org.junit.jupiter.api.Test;
-
 import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import org.junit.jupiter.api.Test;
+
+import com.example.LaFachada.Model.Publicacion;
+import com.example.LaFachada.Model.Reseñas;
 
 class ResenasTest {
 
@@ -17,7 +17,7 @@ class ResenasTest {
 		publicacion.setIdpublicacion(1L);
 		publicacion.setTitulo("Departamento en arriendo");
 		publicacion.setDescripcion("Cerca del metro");
-		publicacion.setPrecio("550000");
+		publicacion.setPrecio(550000);
 		publicacion.setUbicacion("Santiago");
 
 		Reseñas resena = new Reseñas();
