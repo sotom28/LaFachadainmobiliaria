@@ -27,7 +27,7 @@ public class PublicacionRequestDTO {
     @NotNull(message = "El precio no puede ser nulo")
     @Min(value = 0, message = "El precio no puede ser negativo")
     @Max(value = 999999999, message = "El precio excede el límite permitido")
-    private Integer precio;
+    private Double precio;
 
     @NotBlank(message = "La ubicación no puede estar vacía")
     @Size(min = 3, max = 200, message = "La ubicación debe tener entre 3 y 200 caracteres")
@@ -39,20 +39,9 @@ public class PublicacionRequestDTO {
 
     @NotBlank(message = "El tipo de venta no puede estar vacío")
     @Pattern(regexp = "venta|arriendo", message = "El tipo de venta debe ser 'venta' o 'arriendo'")
-    private String tipoventas;
-
- 
+    private String tipoVentas;
 
     @NotNull(message = "El propiedadId no puede ser nulo")
     @Positive(message = "El propiedadId debe ser positivo")
     private Integer propiedadId;
-
-    @NotBlank(message = "El estado no puede estar vacío")
-    @Pattern(regexp = "disponible|vendido|suspendido", message = "El estado debe ser 'disponible', 'vendido' o 'suspendido'")
-    private String estado;
-    
-
-    
-    
 }
-

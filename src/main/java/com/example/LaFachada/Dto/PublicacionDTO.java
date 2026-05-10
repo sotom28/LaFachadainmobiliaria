@@ -26,7 +26,7 @@ public class PublicacionDTO {
 
     @NotBlank(message = "El precio es obligatorio")
     @Size(min = 1, message = "El precio debe ser un número positivo")
-    private Integer precio;
+    private Double precio;
 
 
     @NotBlank(message = "La ubicación es obligatoria")

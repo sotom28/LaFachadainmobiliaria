@@ -9,6 +9,5 @@ import com.example.LaFachada.Model.Resenas;
 
 @Repository
 public interface ResenasRepository extends JpaRepository<Resenas, Long> {
-    List<Resenas> findByPropiedadId(Long propiedadId);
     List<Resenas> findByUsuarioId(Long usuarioId);
 }

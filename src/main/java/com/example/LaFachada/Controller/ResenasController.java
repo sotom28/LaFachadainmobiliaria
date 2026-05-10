@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.LaFachada.Dto.ResenaCrearDTO;
 import com.example.LaFachada.Model.Resenas;
 import com.example.LaFachada.Service.ResenasService;
 
@@ -19,10 +20,10 @@ import com.example.LaFachada.Service.ResenasService;
 @RequestMapping("/api/v1/resenas")
 public class ResenasController {
 
-    private final ResenasService resenasService;
+    private ResenasService resenasService;
 
-    public ResenasController(ResenasService resenasService) {
-        this.resenasService = resenasService;
+    public ResenasController(ResenasService service){
+        this.resenasService = service;
     }
 
     @GetMapping("/all")
@@ -38,16 +39,10 @@ public class ResenasController {
     }
 
     @PostMapping("/crear")
-    public ResponseEntity<Resenas> crearResena(@RequestBody Resenas resena) {
-        Resenas nueva = resenasService.crearResena(resena);
-        
+    public ResponseEntity<Resenas> crearResena(@RequestBody ResenaCrearDTO dto) {
+        Resenas nueva = resenasService.crearResena(dto);
         return ResponseEntity.status(HttpStatus.CREATED).body(nueva);
 
-    }
-
-    @GetMapping("/propiedad/{propiedadId}")
-    public ResponseEntity<List<Resenas>> listarPorPropiedad(@PathVariable Long propiedadId) {
-        return ResponseEntity.ok(resenasService.listarPorPropiedad(propiedadId));
     }
 
     @GetMapping("/usuario/{usuarioId}")
@@ -60,5 +55,4 @@ public class ResenasController {
         boolean eliminado = resenasService.eliminarResena(id);
         return eliminado ? ResponseEntity.noContent().build() : ResponseEntity.notFound().build();
     }
-
 }

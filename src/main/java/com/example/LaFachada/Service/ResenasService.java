@@ -1,22 +1,29 @@
 package com.example.LaFachada.Service;
 
+import com.example.LaFachada.Respository.PublicacionRepository;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
+import com.example.LaFachada.Dto.ResenaCrearDTO;
+import com.example.LaFachada.Model.Publicacion;
 import com.example.LaFachada.Model.Resenas;
 import com.example.LaFachada.Respository.ResenasRepository;
 
+import jakarta.persistence.EntityNotFoundException;
 
 @Service
 public class ResenasService {
 
+    private PublicacionRepository publicacionRepository;
     private final ResenasRepository resenasRepository;
 
-    public ResenasService(ResenasRepository resenasRepository) {
+    public ResenasService(ResenasRepository resenasRepository, PublicacionRepository publicacionRepository) {
         this.resenasRepository = resenasRepository;
+        this.publicacionRepository = publicacionRepository;
     }
 
     public List<Resenas> listarTodas() {
@@ -27,20 +34,20 @@ public class ResenasService {
         return resenasRepository.findById(id);
     }
 
-    public Resenas crearResena(Resenas resena) {
+    public Resenas crearResena(ResenaCrearDTO dto) {
+        Publicacion pub = publicacionRepository.findById(dto.getPublicacionId())
+                .orElseThrow(() -> new EntityNotFoundException("Publicacion no encontrada"));
+        Resenas resena = new Resenas();
+        resena.setFecha(LocalDate.now());
+        resena.setCalificacion(dto.getCalificacion());
+        resena.setComentario(dto.getComentario());
+        resena.setUsuarioId(dto.getUsuarioId());
+        resena.setPublicacion(pub);
         return resenasRepository.save(resena);
-    }
-
-    public List<Resenas> obtenerResenasPorPropiedad(Long propiedadId) {
-        return resenasRepository.findByPropiedadId(propiedadId);
     }
 
     public List<Resenas> obtenerResenasPorUsuario(Long usuarioId) {
         return resenasRepository.findByUsuarioId(usuarioId);
-    }
-
-    public List<Resenas> listarPorPropiedad(Long propiedadId) {
-        return obtenerResenasPorPropiedad(propiedadId);
     }
 
     public List<Resenas> listarPorUsuario(Long usuarioId) {
@@ -54,6 +61,7 @@ public class ResenasService {
         }
         return false;
     }
+
     //// Método para actualizar una reseña
     public Resenas actualizarResena(Long resenaId, Resenas resenaActualizada) {
         Resenas resenaExistente = resenasRepository.findById(resenaId)

@@ -18,7 +18,7 @@ import jakarta.persistence.Column;
 @Entity
 public class Resenas {
 
-    @Column(name = "idresenas")
+    @Column(name = "id_resena")
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idResenas;
@@ -35,12 +35,8 @@ public class Resenas {
     @Column(name = "usuario_id")
     private Long usuarioId;
 
-    @Column(name = "propiedad_id", nullable = false)
-    private Long propiedadId;
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "publicacion_id", nullable = false)
     @JsonBackReference
     private Publicacion publicacion;
-
 }

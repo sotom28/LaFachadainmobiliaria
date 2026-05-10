@@ -17,7 +17,7 @@ class ResenasTest {
 		publicacion.setIdpublicacion(1L);
 		publicacion.setTitulo("Departamento en arriendo");
 		publicacion.setDescripcion("Cerca del metro");
-		publicacion.setPrecio(550000);
+		publicacion.setPrecio(550000.0);
 		publicacion.setUbicacion("Santiago");
 
 		Resenas resena = new Resenas();
@@ -25,7 +25,6 @@ class ResenasTest {
 		resena.setCalificacion(5);
 		resena.setFecha(LocalDate.of(2026, 4, 21));
 		resena.setUsuarioId(10L);
-		resena.setPropiedadId(20L);
 		resena.setPublicacion(publicacion);
 
 		assertNotNull(resena.getPublicacion());

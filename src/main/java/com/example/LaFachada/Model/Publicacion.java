@@ -25,12 +25,10 @@ import lombok.NoArgsConstructor;
 @Entity
 public class Publicacion {
 
-    @Column(name = "idpublicacion")
+    @Column(name = "publicacion_id")
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idpublicacion;
-
-
 
     @jakarta.persistence.Column(name = "titulo")
     private String titulo;
@@ -38,7 +36,7 @@ public class Publicacion {
     private String descripcion;
 
     @Column(name = "precio",nullable = false)
-    private Integer precio;
+    private Double precio;
 
     @Column(name = "ubicacion",nullable = false)
     private String ubicacion;
@@ -58,10 +56,6 @@ public class Publicacion {
 
     @Column(name = "tipo_ventas",nullable = false)
     private String tipoventas;
-
-    
-
-   
 
     @OneToMany(mappedBy = "publicacion", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference

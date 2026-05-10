@@ -7,7 +7,6 @@ public class ResenasRequestDTO {
     private Integer calificacion;
     private LocalDate fecha;
     private Long usuarioId;
-    private Long propiedadId;
     private Long publicacionId;
 
     public String getComentario() { return comentario; }
@@ -21,9 +20,6 @@ public class ResenasRequestDTO {
 
     public Long getUsuarioId() { return usuarioId; }
     public void setUsuarioId(Long usuarioId) { this.usuarioId = usuarioId; }
-
-    public Long getPropiedadId() { return propiedadId; }
-    public void setPropiedadId(Long propiedadId) { this.propiedadId = propiedadId; }
 
     public Long getPublicacionId() { return publicacionId; }
     public void setPublicacionId(Long publicacionId) { this.publicacionId = publicacionId; }
