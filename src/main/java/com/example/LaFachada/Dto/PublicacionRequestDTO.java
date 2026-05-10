@@ -1,9 +1,15 @@
 package com.example.LaFachada.Dto;
 
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import jakarta.validation.constraints.*;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -35,8 +41,7 @@ public class PublicacionRequestDTO {
     @Pattern(regexp = "venta|arriendo", message = "El tipo de venta debe ser 'venta' o 'arriendo'")
     private String tipoventas;
 
-    @Size(max = 500, message = "La URL de foto no puede exceder 500 caracteres")
-    private String fotosUrl;
+ 
 
     @NotNull(message = "El propiedadId no puede ser nulo")
     @Positive(message = "El propiedadId debe ser positivo")

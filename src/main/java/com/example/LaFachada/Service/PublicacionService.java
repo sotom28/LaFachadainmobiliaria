@@ -29,7 +29,7 @@ public class PublicacionService {
     public Publicacion crearPublicacion(Publicacion publicacion) {
         return publicacionRepository.save(publicacion);
     }
-
+/// actualizar una publicación existente
     public Publicacion actualizarPublicacion(Long id, Publicacion publicacionActualizada) {
         return publicacionRepository.findById(id)
                 .map(publicacion -> {

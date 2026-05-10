@@ -1,14 +1,14 @@
 package com.example.LaFachada.Model;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-
-import jakarta.persistence.Column;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -17,8 +17,6 @@ import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.time.LocalDateTime;
 
 
 @NoArgsConstructor
@@ -61,8 +59,7 @@ public class Publicacion {
     @Column(name = "tipo_ventas",nullable = false)
     private String tipoventas;
 
-    @Column(name = "foto_url")
-    private String fotoUrl;
+    
 
    
 
