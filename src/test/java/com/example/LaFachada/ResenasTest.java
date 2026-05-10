@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import org.junit.jupiter.api.Test;
 
 import com.example.LaFachada.Model.Publicacion;
-import com.example.LaFachada.Model.Reseñas;
+import com.example.LaFachada.Model.Resenas;
 
 class ResenasTest {
 
@@ -20,7 +20,7 @@ class ResenasTest {
 		publicacion.setPrecio(550000);
 		publicacion.setUbicacion("Santiago");
 
-		Reseñas resena = new Reseñas();
+		Resenas resena = new Resenas();
 		resena.setComentario("Muy buena ubicación");
 		resena.setCalificacion(5);
 		resena.setFecha(LocalDate.of(2026, 4, 21));
@@ -34,10 +34,5 @@ class ResenasTest {
 		assertEquals(5, resena.getCalificacion());
 		assertEquals(LocalDate.of(2026, 4, 21), resena.getFecha());
 	}
-
-
-    
-
-
 
 }

@@ -12,29 +12,35 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import lombok.Data;
+import jakarta.persistence.Column;
 
 @Data
 @Entity
-public class Reseñas {
+public class Resenas {
 
-
-
+    @Column(name = "idresenas")
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idreseñas;
+    private Long idResenas;
 
+    @Column(name = "comentario", nullable = false)
     private String comentario;
-    private Integer calificacion; // "1-5"
+
+    @Column(name = "calificacion", nullable = false)
+    private Integer calificacion;
+
+    @Column(name = "fecha", nullable = false)
     private LocalDate fecha;
 
+    @Column(name = "usuario_id")
     private Long usuarioId;
-    private Long propiedadId;
 
+    @Column(name = "propiedad_id", nullable = false)
+    private Long propiedadId;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "publicacion_id", nullable = false)
     @JsonBackReference
     private Publicacion publicacion;
 
-    
 }
