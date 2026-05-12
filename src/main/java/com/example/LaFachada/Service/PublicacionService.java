@@ -30,7 +30,7 @@ public class PublicacionService {
     }
 
     /// actualizar una publicación existente
-    public Publicacion actualizarPublicacion(Long id, PublicacionModificarDto dto) {
+    public Publicacion actualizarPublicacion(Integer id, PublicacionModificarDto dto) {
         return publicacionRepository.findById(id)
                 .map(publicacion -> {
                     if(dto.getDescripcion() != null) publicacion.setDescripcion(dto.getDescripcion());
@@ -42,7 +42,7 @@ public class PublicacionService {
                 .orElseThrow(() -> new RuntimeException("Publicación no encontrada con id: " + id));
     }
 
-    public boolean eliminarPublicacion(Long id) {
+    public boolean eliminarPublicacion(Integer id) {
         if (publicacionRepository.existsById(id)) {
             publicacionRepository.deleteById(id);
             return true;
@@ -50,7 +50,7 @@ public class PublicacionService {
         return false;
     }
 
-    public Publicacion obtenerPublicacionPorId(Long id) {
+    public Publicacion obtenerPublicacionPorId(Integer id) {
         return publicacionRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Publicación no encontrada con id: " + id));
     }

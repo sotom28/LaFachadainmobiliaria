@@ -6,7 +6,6 @@ import java.util.Map;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -41,7 +40,7 @@ public class PublicacionController {
 
     /// Obtener una publicación por su ID
     @GetMapping("/{id}")
-    public ResponseEntity<Publicacion> obtenerPorId(@PathVariable Long id) {
+    public ResponseEntity<Publicacion> obtenerPorId(@PathVariable Integer id) {
         try {
             Publicacion publicacion = publicacionService.obtenerPublicacionPorId(id);
             return ResponseEntity.ok(publicacion);
@@ -74,7 +73,7 @@ public class PublicacionController {
 
     //// Actualizar una publicación existente
     @PatchMapping("/actualizar/{id}")
-    public ResponseEntity<Publicacion> actualizarPublicacion(@PathVariable Long id,
+    public ResponseEntity<Publicacion> actualizarPublicacion(@PathVariable Integer id,
             @RequestBody PublicacionModificarDto dto) {
         try {
             Publicacion publicacion = publicacionService.actualizarPublicacion(id, dto);
@@ -86,7 +85,7 @@ public class PublicacionController {
 
     //// Eliminar una publicación por su ID
     @DeleteMapping("/eliminar/{id}")
-    public ResponseEntity<Void> eliminarPublicacion(@PathVariable Long id) {
+    public ResponseEntity<Void> eliminarPublicacion(@PathVariable Integer id) {
         boolean eliminado = publicacionService.eliminarPublicacion(id);
         return eliminado ? ResponseEntity.noContent().build() : ResponseEntity.notFound().build();
     }

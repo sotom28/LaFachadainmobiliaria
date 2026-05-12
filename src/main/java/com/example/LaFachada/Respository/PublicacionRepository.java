@@ -9,7 +9,7 @@ import com.example.LaFachada.Model.Publicacion;
 
 
 @Repository
-public interface PublicacionRepository extends JpaRepository<Publicacion, Long> {
+public interface PublicacionRepository extends JpaRepository<Publicacion, Integer> {
     List<Publicacion> findByTituloContainingIgnoreCase(String titulo);
     List<Publicacion> findByUbicacionContainingIgnoreCase(String ubicacion);
     List<Publicacion> findByPrecioBetween(Double precioMin, Double precioMax);

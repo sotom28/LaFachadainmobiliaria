@@ -34,6 +34,12 @@ public class ResenasService {
         return resenasRepository.findById(id);
     }
 
+
+    public List<Resenas> obtenerPorPublicacionId(Integer id) {
+        Publicacion pub =publicacionRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("No se han encontrado esta publicacion"));
+        return resenasRepository.findByPublicacion(pub);
+    }
+
     public Resenas crearResena(ResenaCrearDTO dto) {
         Publicacion pub = publicacionRepository.findById(dto.getPublicacionId())
                 .orElseThrow(() -> new EntityNotFoundException("Publicacion no encontrada"));

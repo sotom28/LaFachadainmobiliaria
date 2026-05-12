@@ -2,6 +2,7 @@ package com.example.LaFachada.Controller;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -20,16 +21,20 @@ import com.example.LaFachada.Service.ResenasService;
 @RequestMapping("/api/v1/resenas")
 public class ResenasController {
 
+    @Autowired
     private ResenasService resenasService;
-
-    public ResenasController(ResenasService service){
-        this.resenasService = service;
-    }
 
     @GetMapping("/all")
     public ResponseEntity<List<Resenas>> listarTodas() {
         return ResponseEntity.ok(resenasService.listarTodas());
     }
+
+    @GetMapping("/publicacionId/{id}")
+    public ResponseEntity<List<Resenas>> listarTodasPorPublicacionId(@PathVariable Integer id) {
+        List<Resenas> resenas = resenasService.obtenerPorPublicacionId(id);
+        return ResponseEntity.ok(resenas);
+    }
+
 
     @GetMapping("/{id}")
     public ResponseEntity<Resenas> obtenerPorId(@PathVariable Long id) {

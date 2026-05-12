@@ -21,9 +21,9 @@ public class ResenaCrearDTO {
     private LocalDate fecha;
 
     @NotNull(message = "La resena tiene que estar asociada a una publicacion")
-    private Long publicacionId;
+    private Integer publicacionId;
 
     @NotNull(message = "El id usuario no puede ser nulo")
-    private Long usuarioId;
+    private Integer usuarioId;
 
 }

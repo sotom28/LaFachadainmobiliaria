@@ -28,7 +28,7 @@ public class Publicacion {
     @Column(name = "publicacion_id")
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idpublicacion;
+    private Integer idpublicacion;
 
     @jakarta.persistence.Column(name = "titulo")
     private String titulo;

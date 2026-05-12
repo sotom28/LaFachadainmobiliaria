@@ -21,7 +21,7 @@ public class Resenas {
     @Column(name = "id_resena")
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idResenas;
+    private Integer idResenas;
 
     @Column(name = "comentario", nullable = false)
     private String comentario;
@@ -33,7 +33,7 @@ public class Resenas {
     private LocalDate fecha;
 
     @Column(name = "usuario_id")
-    private Long usuarioId;
+    private Integer usuarioId;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "publicacion_id", nullable = false)
