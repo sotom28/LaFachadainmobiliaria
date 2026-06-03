@@ -1,0 +1,32 @@
+
+version: '3.8'
+services:
+  db:
+    image: mariadb:latest
+    container_name: db
+    restart: always
+    environment:
+      MARIADB_DATABASE: lafachada
+      MARIADB_ROOT_PASSWORD: 1234
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+
+  publicacion-service:
+    build: .
+    container_name: microservicio-publicacion
+    restart: always
+    depends_on:
+      - db
+    environment:
+      SPRING_PROFILES_ACTIVE: maria
+      SPRING_DATASOURCE_URL: jdbc:mariadb://db:3306/lafachada?createDatabaseIfNotExist=true
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: 1234
+      SERVER_PORT: 8084
+    ports:
+      - "8084:8084"
+
+volumes:
+  db_data:
