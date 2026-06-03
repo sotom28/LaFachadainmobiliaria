@@ -54,9 +54,6 @@ public class Publicacion {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime fechaPublicacion;
 
-    @Column(name = "tipo_ventas",nullable = false)
-    private String tipoventas;
-
     @OneToMany(mappedBy = "publicacion", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference
     private List<Resenas> resenas = new ArrayList<>();

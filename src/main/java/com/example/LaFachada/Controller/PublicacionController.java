@@ -32,13 +32,13 @@ public class PublicacionController {
         this.publicacionService = publicacionService;
     }
 
-    ///// Listar todas las publicaciones
+    // Listar todas las publicaciones
     @GetMapping("/all")
     public ResponseEntity<List<Publicacion>> listarTodas() {
         return ResponseEntity.ok(publicacionService.listarTodas());
     }
 
-    /// Obtener una publicación por su ID
+    // Obtener una publicación por su ID
     @GetMapping("/{id}")
     public ResponseEntity<Publicacion> obtenerPorId(@PathVariable Integer id) {
         try {
@@ -49,7 +49,7 @@ public class PublicacionController {
         }
     }
 
-    ///// Crear una nueva publicación desde un DTO
+    // Crear una nueva publicación desde un DTO
     @PostMapping("/crear")
     public ResponseEntity<?> crearPublicacion(@Valid @RequestBody PublicacionRequestDTO dto, BindingResult result) {
 
@@ -71,7 +71,7 @@ public class PublicacionController {
         }
     }
 
-    //// Actualizar una publicación existente
+    // Actualizar una publicación existente
     @PatchMapping("/actualizar/{id}")
     public ResponseEntity<Publicacion> actualizarPublicacion(@PathVariable Integer id,
             @RequestBody PublicacionModificarDto dto) {
@@ -83,7 +83,7 @@ public class PublicacionController {
         }
     }
 
-    //// Eliminar una publicación por su ID
+    // Eliminar una publicación por su ID
     @DeleteMapping("/eliminar/{id}")
     public ResponseEntity<Void> eliminarPublicacion(@PathVariable Integer id) {
         boolean eliminado = publicacionService.eliminarPublicacion(id);

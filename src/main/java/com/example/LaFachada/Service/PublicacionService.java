@@ -55,7 +55,7 @@ public class PublicacionService {
                 .orElseThrow(() -> new RuntimeException("Publicación no encontrada con id: " + id));
     }
 
-    /// mapero de DTO a y guardarlo
+    // mapero de DTO a y guardarlo
     public Publicacion crearDesdeDTO(PublicacionRequestDTO dto) {
         Publicacion pub = new Publicacion();
         pub.setTitulo(dto.getTitulo());
@@ -64,7 +64,6 @@ public class PublicacionService {
         pub.setUbicacion(dto.getUbicacion());
 
         pub.setVendedorId(dto.getVendedorId());
-        pub.setTipoventas(dto.getTipoVentas());
         pub.setPropiedadId(dto.getPropiedadId());
 
         pub.setEstado("disponible");

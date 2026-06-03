@@ -37,10 +37,6 @@ public class PublicacionRequestDTO {
     @Positive(message = "El vendedorId debe ser positivo")
     private Integer vendedorId;
 
-    @NotBlank(message = "El tipo de venta no puede estar vacío")
-    @Pattern(regexp = "venta|arriendo", message = "El tipo de venta debe ser 'venta' o 'arriendo'")
-    private String tipoVentas;
-
     @NotNull(message = "El propiedadId no puede ser nulo")
     @Positive(message = "El propiedadId debe ser positivo")
     private Integer propiedadId;
