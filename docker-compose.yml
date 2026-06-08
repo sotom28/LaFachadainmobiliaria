@@ -1,0 +1,46 @@
+services:
+  db:
+    image: mariadb:latest
+    container_name: db
+    restart: always
+    environment:
+      MARIADB_DATABASE: ${DB_NAME} 
+      MARIADB_USER: ${DB_USER}
+      MARIADB_PASSWORD: ${DB_PASSWORD}
+      MARIADB_ROOT_PASSWORD: ${DB_ROOT_PASSWORD} 
+    ports:
+      - "3308:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+    networks:
+      - lafachada-network
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+
+  publicacion-service:
+    build: .
+    container_name: microservicio-publicacion
+    restart: always
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      SPRING_PROFILES_ACTIVE: maria
+      SPRING_DATASOURCE_URL: jdbc:mariadb://db:${DB_PORT}/${DB_NAME}?createDatabaseIfNotExist=true
+      SPRING_DATASOURCE_USERNAME: ${DB_USER} 
+      SPRING_DATASOURCE_PASSWORD: ${DB_PASSWORD} 
+      SERVER_PORT: ${SERVER_PORT} 
+    ports:
+      - "8086:8086"
+    networks:
+      - lafachada-network
+volumes:
+  db_data:
+
+networks:
+  lafachada-network:
+    external: true

@@ -13,6 +13,12 @@ target/
 .springBeans
 .sts4-cache
 
+### Env ###
+.env
+
+### build helper ###
+Makefile
+
 ### IntelliJ IDEA ###
 .idea
 *.iws
