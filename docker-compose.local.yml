@@ -1,4 +1,29 @@
 services:
+  floci:
+    image: floci/floci:latest
+    container_name: floci_s3
+    ports:
+      - "4566:4566"
+    environment:
+      - SERVICES=s3
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"
+    networks:
+      - lafachada-network
+
+  floci-init:
+    image: amazon/aws-cli
+    container_name: floci_init_aws
+    depends_on:
+      - floci
+    environment:
+      - AWS_ACCESS_KEY_ID=test
+      - AWS_SECRET_ACCESS_KEY=test
+      - AWS_DEFAULT_REGION=us-east-1
+    networks:
+      - lafachada-network
+    entrypoint: /bin/sh -c "echo 'Esperando a que Floci inicie...' && until aws --endpoint-url=http://floci:4566 s3 ls > /dev/null 2>&1; do sleep 1; done && echo 'Creando bucket mi-bucket-local...' && aws --endpoint-url=http://floci:4566 s3 mb s3://mi-bucket-local && echo '¡Bucket creado con éxito!'" 
+
   db:
     image: mariadb:latest
     container_name: db
@@ -6,8 +31,8 @@ services:
     environment:
       MARIADB_DATABASE: lafachada
       MARIADB_USER: public_user_test
-      MARIADB_PASSWORD: 1234
-      MARIADB_ROOT_PASSWORD: 1234
+      MARIADB_PASSWORD: "1234"
+      MARIADB_ROOT_PASSWORD: "1234"
     ports:
       - "3308:3306"
     volumes:
@@ -20,7 +45,6 @@ services:
       timeout: 5s
       retries: 5
 
-
   publicacion-service:
     build: .
     container_name: microservicio-publicacion
@@ -28,16 +52,20 @@ services:
     depends_on:
       db:
         condition: service_healthy
+      floci-init:
+        condition: service_completed_successfully
     environment:
       SPRING_PROFILES_ACTIVE: maria
       SPRING_DATASOURCE_URL: jdbc:mariadb://db:3306/lafachada?createDatabaseIfNotExist=true
       SPRING_DATASOURCE_USERNAME: public_user_test
-      SPRING_DATASOURCE_PASSWORD: 1234
+      SPRING_DATASOURCE_PASSWORD: "1234"
       SERVER_PORT: 8086
+      AWS_S3_ENDPOINT: http://floci:4566
     ports:
       - "8086:8086"
     networks:
       - lafachada-network
+
 volumes:
   db_data:
 

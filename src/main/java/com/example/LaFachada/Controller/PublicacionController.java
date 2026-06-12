@@ -1,7 +1,8 @@
 package com.example.LaFachada.Controller;
 
-import java.util.List;
+import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.http.HttpStatus;
@@ -14,13 +15,17 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import jakarta.validation.Valid;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.example.LaFachada.Dto.PublicacionModificarDto;
 import com.example.LaFachada.Dto.PublicacionRequestDTO;
+import com.example.LaFachada.Model.Foto;
 import com.example.LaFachada.Model.Publicacion;
 import com.example.LaFachada.Service.PublicacionService;
+
+import jakarta.validation.Valid;
 
 @RequestMapping("/api/v1/publicacion")
 @RestController
@@ -68,6 +73,25 @@ public class PublicacionController {
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(
                     Map.of("error", "Error al crear la publicación: " + e.getMessage()));
+        }
+    }
+
+    // Subir foto
+    @PostMapping("/{id}/fotos")
+    public ResponseEntity<?> subirFoto(@PathVariable("id") Integer publicacionId,
+            @RequestParam("foto") List<MultipartFile> fotos) {
+        try {
+            if (fotos == null || fotos.isEmpty() || fotos.get(0).isEmpty()) {
+                return ResponseEntity.badRequest().body("No se han seleccionado archivos válidos para subir.");
+            }
+            List<Foto> fotoGuardada = publicacionService.agregarFotoPublicacion(publicacionId, fotos);
+            return ResponseEntity.status(HttpStatus.CREATED).body(fotoGuardada);
+
+        } catch (IOException e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Error al procesar y subir el archivo: " + e.getMessage());
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
     }
 

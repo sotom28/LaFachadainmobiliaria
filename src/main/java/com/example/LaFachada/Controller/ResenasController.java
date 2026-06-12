@@ -17,12 +17,16 @@ import com.example.LaFachada.Dto.ResenaCrearDTO;
 import com.example.LaFachada.Model.Resenas;
 import com.example.LaFachada.Service.ResenasService;
 
+
 @RestController
 @RequestMapping("/api/v1/resenas")
 public class ResenasController {
 
-    @Autowired
-    private ResenasService resenasService;
+    private final ResenasService resenasService;
+
+    ResenasController(ResenasService resenasService) {
+        this.resenasService = resenasService;
+    }
 
     @GetMapping("/all")
     public ResponseEntity<List<Resenas>> listarTodas() {
