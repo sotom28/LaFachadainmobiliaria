@@ -13,8 +13,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Data
 public class PublicacionDTO {
-
-
     @NotBlank(message = "El título es obligatorio")
     @Size(min = 2, max = 255, message = "El título debe tener entre 2 y 255 caracteres")
     private String titulo;

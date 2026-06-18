@@ -14,7 +14,7 @@ class ResenasTest {
 	@Test
 	void crearResenaConPublicacion() {
 		Publicacion publicacion = new Publicacion();
-		publicacion.setIdpublicacion(1);
+		publicacion.setIdPublicacion(1);
 		publicacion.setTitulo("Departamento en arriendo");
 		publicacion.setDescripcion("Cerca del metro");
 		publicacion.setPrecio(550000.0);
@@ -28,7 +28,7 @@ class ResenasTest {
 		resena.setPublicacion(publicacion);
 
 		assertNotNull(resena.getPublicacion());
-		assertEquals(1, resena.getPublicacion().getIdpublicacion());
+		assertEquals(1, resena.getPublicacion().getIdPublicacion());
 		assertEquals("Muy buena ubicación", resena.getComentario());
 		assertEquals(5, resena.getCalificacion());
 		assertEquals(LocalDate.of(2026, 4, 21), resena.getFecha());

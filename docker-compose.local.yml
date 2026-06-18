@@ -24,9 +24,9 @@ services:
       - lafachada-network
     entrypoint: /bin/sh -c "echo 'Esperando a que Floci inicie...' && until aws --endpoint-url=http://floci:4566 s3 ls > /dev/null 2>&1; do sleep 1; done && echo 'Creando bucket mi-bucket-local...' && aws --endpoint-url=http://floci:4566 s3 mb s3://mi-bucket-local && echo '¡Bucket creado con éxito!'" 
 
-  db:
+  mariadb-publicacion-db:
     image: mariadb:latest
-    container_name: db
+    container_name: mariadb-publicacion
     restart: always
     environment:
       MARIADB_DATABASE: lafachada
@@ -50,13 +50,13 @@ services:
     container_name: microservicio-publicacion
     restart: always
     depends_on:
-      db:
+      mariadb-publicacion-db:
         condition: service_healthy
       floci-init:
         condition: service_completed_successfully
     environment:
       SPRING_PROFILES_ACTIVE: maria
-      SPRING_DATASOURCE_URL: jdbc:mariadb://db:3306/lafachada?createDatabaseIfNotExist=true
+      SPRING_DATASOURCE_URL: jdbc:mariadb://mariadb-publicacion-db:3306/lafachada?createDatabaseIfNotExist=true
       SPRING_DATASOURCE_USERNAME: public_user_test
       SPRING_DATASOURCE_PASSWORD: "1234"
       SERVER_PORT: 8086

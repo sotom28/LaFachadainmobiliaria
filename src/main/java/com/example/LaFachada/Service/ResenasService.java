@@ -18,7 +18,7 @@ import jakarta.persistence.EntityNotFoundException;
 @Service
 public class ResenasService {
 
-    private PublicacionRepository publicacionRepository;
+    private final PublicacionRepository publicacionRepository;
     private final ResenasRepository resenasRepository;
 
     public ResenasService(ResenasRepository resenasRepository, PublicacionRepository publicacionRepository) {
