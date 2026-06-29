@@ -28,7 +28,7 @@ public class Publicacion {
     @Column(name = "publicacion_id")
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer idpublicacion;
+    private Integer idPublicacion;
 
     @jakarta.persistence.Column(name = "titulo")
     private String titulo;
@@ -55,7 +55,11 @@ public class Publicacion {
     private LocalDateTime fechaPublicacion;
 
     @OneToMany(mappedBy = "publicacion", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonManagedReference
+    @JsonManagedReference(value = "publicacion-resenas")
     private List<Resenas> resenas = new ArrayList<>();
+
+    @OneToMany(mappedBy = "publicacion", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference(value = "publicacion-fotos")
+    private List<Foto> fotos = new ArrayList<>();
 
 }
