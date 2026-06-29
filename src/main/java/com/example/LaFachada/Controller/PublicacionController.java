@@ -43,6 +43,12 @@ public class PublicacionController {
         return ResponseEntity.ok(publicacionService.listarTodas());
     }
 
+    @PostMapping("/por-propiedades")
+    public ResponseEntity<List<Publicacion>> buscarPublicacionPorPropiedades(@RequestBody List<Integer> id) {
+        List<Publicacion> publicaciones = publicacionService.buscarPorIdPropiedad(id);
+        return ResponseEntity.ok(publicaciones);
+    }
+
     // Obtener una publicación por su ID
     @GetMapping("/{id}")
     public ResponseEntity<Publicacion> obtenerPorId(@PathVariable Integer id) {
@@ -113,5 +119,4 @@ public class PublicacionController {
         boolean eliminado = publicacionService.eliminarPublicacion(id);
         return eliminado ? ResponseEntity.noContent().build() : ResponseEntity.notFound().build();
     }
-
 }

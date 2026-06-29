@@ -41,6 +41,14 @@ public class PublicacionService {
         return publicacionRepository.save(publicacion);
     }
 
+    public List<Publicacion> buscarPorIdPropiedad(List<Integer> propiedadIds) {
+        if(propiedadIds == null || propiedadIds.isEmpty()) {
+            return List.of();
+        }
+
+        return publicacionRepository.buscarPorPropiedadIds(propiedadIds);
+    }
+
     @Transactional
     public List<Foto> agregarFotoPublicacion(Integer publicacionId, List<MultipartFile> foto) throws IOException {
         Publicacion publicacion = publicacionRepository.findById(publicacionId)
