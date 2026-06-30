@@ -5,7 +5,6 @@ on:
     branches:
       - aws
 
-      
 jobs:
   build-and-push-aws:
     runs-on: ubuntu-latest
@@ -13,6 +12,20 @@ jobs:
     steps:
       - name: Descargar codigo del repo
         uses: actions/checkout@v4
+
+      
+      - name: Configurar JDK 21
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+          cache: 'maven' # Esto hace que los siguientes builds sean más rápidos
+
+      # --- NUEVO: Construir el archivo .jar (target/LaFachada-0.0.1-SNAPSHOT.jar) ---
+      - name: Compilar y empaquetar con Maven
+        run: |
+          chmod +x mvnw
+          ./mvnw clean package -DskipTests
 
       - name: Configurar credenciales de aws
         uses: aws-actions/configure-aws-credentials@v4
