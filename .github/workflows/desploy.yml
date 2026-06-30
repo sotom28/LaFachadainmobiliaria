@@ -25,7 +25,7 @@ jobs:
       - name: Compilar y empaquetar con Maven
         run: |
           chmod +x mvnw
-          ./mvnw clean package -DskipTests
+          ./mvnw clean package 
 
       - name: Configurar credenciales de aws
         uses: aws-actions/configure-aws-credentials@v4
