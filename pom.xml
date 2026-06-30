@@ -7,13 +7,12 @@
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>4.0.5</version>
-        <relativePath /> <!-- lookup parent from repository -->
-    </parent>
+        <relativePath /> </parent>
     <groupId>com.example</groupId>
     <artifactId>LaFachada</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name />
-    <description />
+    <name>LaFachada</name>
+    <description>LaFachada</description>
     <url />
     <licenses>
         <license />
@@ -115,6 +114,15 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+            
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <forkCount>0</forkCount>
+                    <reuseForks>true</reuseForks>
+                </configuration>
             </plugin>
         </plugins>
     </build>
