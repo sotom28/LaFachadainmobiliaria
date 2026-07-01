@@ -17,10 +17,9 @@ import software.amazon.awssdk.services.s3.model.PutObjectRequest;
 public class S3Service {
 
     private final S3Client s3Client;
-    private final String bucketName = "mi-bucket-local";
 
-    @Value("${AWS_S3_ENDPOINT:http://floci:4566}")
-    private String s3EndPoint;
+    @Value("${AWS_S3_BUCKET:mi-bucket-local}")
+    private String bucketName;
 
     public S3Service(S3Client s3Client) {
         this.s3Client = s3Client;
@@ -44,7 +43,7 @@ public class S3Service {
             s3Client.putObject(putObjectRequest,
                     RequestBody.fromInputStream(nuevaFoto.getInputStream(), nuevaFoto.getSize()));
 
-            String ruta = s3EndPoint + "/" + bucketName + "/" + rutaS3;
+            String ruta = "https://" + bucketName + "/" + rutaS3;
             Urls.add(ruta);
         }
         return Urls;
