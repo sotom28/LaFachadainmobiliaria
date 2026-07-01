@@ -19,9 +19,9 @@ jobs:
         with:
           java-version: '21'
           distribution: 'temurin'
-          cache: 'maven' # Esto hace que los siguientes builds sean más rápidos
+          cache: 'maven'
 
-      # --- NUEVO: Construir el archivo .jar (target/LaFachada-0.0.1-SNAPSHOT.jar) ---
+      
       - name: Compilar y empaquetar con Maven
         run: |
           chmod +x mvnw
