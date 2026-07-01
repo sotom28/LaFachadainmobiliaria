@@ -6,7 +6,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import java.util.List;
 
-
 import com.example.LaFachada.Model.Publicacion;
 import com.example.LaFachada.Service.PublicacionService;
 
@@ -16,8 +15,7 @@ import org.springframework.boot.webmvc.test.autoconfigure.WebMvcTest;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 
-@WebMvcTest
-(PublicacionController.class)
+@WebMvcTest(PublicacionController.class)
 class PublicacionControllerTest {
 
     @Autowired
@@ -30,7 +28,7 @@ class PublicacionControllerTest {
     void listarTodas() throws Exception {
 
         Publicacion p = new Publicacion();
-      
+
         p.setTitulo("Casa en venta");
 
         when(publicacionService.listarTodas())
@@ -55,7 +53,4 @@ class PublicacionControllerTest {
 
     }
 
-    
-    
-    
 }

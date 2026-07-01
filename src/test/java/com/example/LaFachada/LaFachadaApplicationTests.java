@@ -9,22 +9,20 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.boot.test.context.SpringBootTest;
 
-@ActiveProfiles("maria")
 @SpringBootTest
+@ActiveProfiles("test")
 class LaFachadaApplicationTests {
 
-	@Autowired
-	private ApplicationContext applicationContext;
+    @Autowired
+    private ApplicationContext applicationContext;
 
-	@Test
-	void contextLoads() {
-	}
+    @Test
+    void contextLoads() {
+    }
 
-	@Test
-	void publicacionControllerBeanExiste() {
-		Assertions.assertNotNull(applicationContext.getBean(PublicacionController.class));
-	}
-
-	
+    @Test
+    void publicacionControllerBeanExiste() {
+        Assertions.assertNotNull(applicationContext.getBean(PublicacionController.class));
+    }
 
 }
