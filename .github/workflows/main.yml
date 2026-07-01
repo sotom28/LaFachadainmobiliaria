@@ -7,6 +7,7 @@ on:
 jobs:
   test-and-build:
     runs-on: ubuntu-latest
+    environment: fullstack3
 
     steps:
     - name: Descargar c�digo fuente
@@ -78,5 +79,5 @@ jobs:
         run: |
           aws ecs update-service \
           --cluster fullstack3 \
-          --service servicio_publicacion \
+          --service publicacion-task-service-89muork2 \
           --force-new-deployment
