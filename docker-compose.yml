@@ -28,11 +28,11 @@ services:
 
   mariadb-publicacion-db:
     image: mariadb:latest
-    container_name: mariadb-publicacion2
+    container_name: mariadb-publicacion
     restart: always
     environment:
       - MARIADB_DATABASE=lafachada
-      - MARIADB_USER=public_user_test
+      - MARIADB_USER=public_user
       - MARIADB_PASSWORD=1234
       - MARIADB_ROOT_PASSWORD=1234
     ports:
