@@ -44,6 +44,7 @@ jobs:
           aws ecr describe-repositories --repository-names publicacion --region ${{ secrets.AWS_REGION }} || \
           aws ecr create-repository --repository-name publicacion --region ${{ secrets.AWS_REGION }}
 
+          
       - name: Construir y publicar en aws
         uses: docker/build-push-action@v7
         with:
