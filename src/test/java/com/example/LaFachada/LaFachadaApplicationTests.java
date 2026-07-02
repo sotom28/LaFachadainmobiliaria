@@ -9,7 +9,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.boot.test.context.SpringBootTest;
 
-@ActiveProfiles("maria")
+@ActiveProfiles("test")
 @SpringBootTest
 class LaFachadaApplicationTests {
 
