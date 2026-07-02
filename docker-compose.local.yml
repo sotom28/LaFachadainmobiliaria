@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   floci:
-    image: floci/floci:latest
+    image: floci/floci:latest   # ⚠️ confirmar si es tu imagen real o debería ser localstack/localstack
     container_name: floci_s3
     ports:
       - "4566:4566"
@@ -24,22 +24,21 @@ services:
       - AWS_DEFAULT_REGION=us-east-1
     networks:
       - lafachada-network
-    entrypoint: /bin/sh -c "echo 'Esperando a que Floci inicie...' && until aws --endpoint-url=http://floci:4566 s3 ls > /dev/null 2>&1; do sleep 1; done && echo 'Creando bucket mi-bucket-local...' && aws --endpoint-url=http://floci:4566 s3 mb s3://mi-bucket-local && echo '¡Bucket creado con éxito!'" 
+    entrypoint: /bin/sh -c "echo 'Esperando a que Floci inicie...' && until aws --endpoint-url=http://floci:4566 s3 ls > /dev/null 2>&1; do sleep 1; done && echo 'Creando bucket mi-bucket-local...' && aws --endpoint-url=http://floci:4566 s3 mb s3://mi-bucket-local && echo '¡Bucket creado con éxito!'"
 
   mariadb-publicacion-db:
     image: mariadb:latest
-    container_name: mariadb-publicacion
+    container_name: mariadb-publicacion2
     restart: always
     environment:
-      # 💡 Corregido a formato de lista estándar de Docker con "-"
       - MARIADB_DATABASE=lafachada
       - MARIADB_USER=public_user_test
       - MARIADB_PASSWORD=1234
       - MARIADB_ROOT_PASSWORD=1234
     ports:
-      - "3312:3306"       
+      - "3312:3306"
     volumes:
-      - mariadb_publicacion_data:/var/lib/mysql 
+      - mariadb_publicacion_data:/var/lib/mysql
     networks:
       - lafachada-network
     healthcheck:
@@ -50,7 +49,7 @@ services:
 
   publicacion-service:
     build: .
-    container_name: microservicio-publicacion
+    container_name: microservicio-publicacion2
     restart: always
     depends_on:
       mariadb-publicacion-db:
@@ -59,13 +58,11 @@ services:
         condition: service_completed_successfully
     environment:
       - SPRING_PROFILES_ACTIVE=maria
-      # 💡 Corregido: Ahora apunta a "mariadb-publicacion" que es el container_name real de tu DB
-      - SPRING_DATASOURCE_URL=jdbc:mariadb://mariadb-publicacion:3306/lafachada?createDatabaseIfNotExist=true
+      - SPRING_DATASOURCE_URL=jdbc:mariadb://mariadb-publicacion-db:3306/lafachada?createDatabaseIfNotExist=true
       - SPRING_DATASOURCE_USERNAME=public_user_test
       - SPRING_DATASOURCE_PASSWORD=1234
       - SERVER_PORT=8086
       - AWS_S3_ENDPOINT=http://floci:4566
-      
       - SECURITY_JWT_SECRET=${JWT_SECRET}
     ports:
       - "8086:8086"
@@ -73,8 +70,8 @@ services:
       - lafachada-network
 
 volumes:
-  mariadb_publicacion_data: 
+  mariadb_publicacion_data:
 
 networks:
   lafachada-network:
-    external: true
+
