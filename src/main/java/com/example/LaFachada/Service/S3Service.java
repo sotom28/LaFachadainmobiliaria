@@ -43,7 +43,7 @@ public class S3Service {
             s3Client.putObject(putObjectRequest,
                     RequestBody.fromInputStream(nuevaFoto.getInputStream(), nuevaFoto.getSize()));
 
-            String ruta = "https://" + bucketName + ".s3.amazonaws.com/" + rutaS3;
+            String ruta = "https://" + bucketName  + ".s3.us-east-1.amazonaws.com/" + rutaS3;
             Urls.add(ruta);
         }
         return Urls;
