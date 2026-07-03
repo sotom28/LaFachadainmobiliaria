@@ -18,7 +18,7 @@ public class S3Service {
 
     private final S3Client s3Client;
 
-    @Value("${AWS_S3_BUCKET:mi-bucket-local}")
+    @Value("${AWS_S3_BUCKET:fotos-fachada}")
     private String bucketName;
 
     public S3Service(S3Client s3Client) {
