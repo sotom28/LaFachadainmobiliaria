@@ -26,6 +26,7 @@ public class ResenasService {
         this.publicacionRepository = publicacionRepository;
     }
 
+    
     public List<Resenas> listarTodas() {
         return resenasRepository.findAll();
     }
