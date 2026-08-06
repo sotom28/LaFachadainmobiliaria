@@ -19,6 +19,7 @@ public class S3Service {
 
     private final S3Client s3Client;
 
+    
     @Value("${AWS_S3_BUCKET:mi-bucket-local}")
     private String bucketName;
 
