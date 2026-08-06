@@ -45,6 +45,7 @@ public class PublicacionDTO {
     @Size(min = 2, max = 255, message = "El tipo de propiedad debe tener entre 2 y 255 caracteres")
     private String tipoPropiedad;
 
+    
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime fechaPublicacion;
 }
