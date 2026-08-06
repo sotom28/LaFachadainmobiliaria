@@ -58,6 +58,7 @@ public class ResenasController {
         return ResponseEntity.ok(resenasService.listarPorUsuario(usuarioId));
     }
 
+    
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> eliminar(@PathVariable Long id) {
         boolean eliminado = resenasService.eliminarResena(id);
