@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - aws
+  workflow_dispatch: # <-- ESTO ACTIVA EL BOTÓN MANUAL EN LA WEB
 
 jobs:
   build-and-push-aws:
