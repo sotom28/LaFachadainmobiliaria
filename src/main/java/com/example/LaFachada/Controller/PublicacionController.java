@@ -49,6 +49,7 @@ public class PublicacionController {
         return ResponseEntity.ok(publicaciones);
     }
 
+    
     // Obtener una publicación por su ID
     @GetMapping("/{id}")
     public ResponseEntity<Publicacion> obtenerPorId(@PathVariable Integer id) {
