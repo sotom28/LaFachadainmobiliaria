@@ -71,6 +71,8 @@ public class PublicacionController {
             return ResponseEntity.badRequest().body(errores);
         }
 
+
+        
         try {
             Publicacion nuevaPublicacion = publicacionService.crearDesdeDTO(dto);
             return ResponseEntity.status(HttpStatus.CREATED).body(nuevaPublicacion);
