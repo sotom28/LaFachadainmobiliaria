@@ -44,6 +44,7 @@ public class Publicacion {
     @Column(name = "vendedor_id",nullable = false)
     private Integer vendedorId;
 
+    
     @Column(name = "propiedad_id",nullable = false)
     private Integer propiedadId;
 
