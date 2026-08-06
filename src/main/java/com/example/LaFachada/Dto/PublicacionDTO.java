@@ -37,6 +37,7 @@ public class PublicacionDTO {
     @Size (min = 1, message = "El ID de la propiedad debe ser un número positivo")
     private Integer propiedadId;
 
+    
     @NotBlank(message = "El estado es obligatorio")
     @Size(min = 2, max = 255, message = "El estado debe tener entre 2 y 255 caracteres")
     private String estado;
