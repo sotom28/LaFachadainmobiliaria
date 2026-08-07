@@ -8,6 +8,8 @@ import org.springframework.stereotype.Repository;
 import com.example.LaFachada.Model.Publicacion;
 import com.example.LaFachada.Model.Resenas;
 
+
+
 @Repository
 public interface ResenasRepository extends JpaRepository<Resenas, Long> {
     List<Resenas> findByUsuarioId(Long usuarioId);
