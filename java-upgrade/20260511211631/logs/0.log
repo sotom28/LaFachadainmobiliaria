@@ -1,0 +1,19 @@
+2026-05-11T21:16:31.988Z [INFO] ----------------------invoke install_jdk----------------------
+2026-05-11T21:16:31.989Z [INFO] [Tool.invoke]({name: install_jdk, input: {
+  "version": "21",
+  "projectPath": "c:\\Users\\rodol\\Desktop\\fullstack3\\backendlafachada\\LaFachadainmobiliaria"
+}}).
+2026-05-11T21:16:31.989Z [INFO] [Tool.invoke] do invoke.
+2026-05-11T21:16:53.227Z [INFO] [Tool.invoke]({result: {
+  "result": {
+    "name": "java",
+    "path": "C:\\Users\\rodol\\.jdk\\jdk-21.0.8(1)\\bin",
+    "version": "21.0.8"
+  },
+  "message": "JDK 21 is installed at C:\\Users\\rodol\\.jdk\\jdk-21.0.8(1)\\bin",
+  "telemetry": {
+    "tool": "JDK",
+    "version": "21"
+  }
+}}).
+2026-05-11T21:16:53.228Z [INFO] ----------------------invoked install_jdk----------------------
