@@ -9,7 +9,7 @@ on:
 jobs:
   build-and-push-aws:
     runs-on: ubuntu-latest
-    environment: fullstack3
+    
 
     steps:
       - name: Descargar codigo del repo
